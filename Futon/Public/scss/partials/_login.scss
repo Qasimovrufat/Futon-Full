@@ -1,0 +1,96 @@
+.login-area{
+    padding-top: 75px;
+    padding-bottom: 40px;
+    .login-register .tab-pane{
+        display: none;
+    }
+  .login-tab-list{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+    a:first-child::before{
+        background-color: #454545;
+    bottom: 5px;
+    content: "";
+    height: 18px;
+    margin: 0 auto;
+    position: absolute;
+    right: -2px;
+    transition: all 0.4s ease 0s;
+    width: 1px;
+    }
+    a.active h4{
+        color: #ff5313;
+    }
+    a{
+        position: relative;
+        &:hover h4{
+            color: #ff5313;
+        }
+        h4{
+            font-size: 25px;
+            font-weight: 700;
+            margin: 0 20px;
+            text-transform: capitalize;
+            transition: all 0.3s ease 0s;
+            font-family: "Open Sans", sans-serif;
+           
+        }
+    }
+  }
+    .login-form-container{
+        background: transparent none repeat scroll 0 0;
+        box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+        padding: 80px;
+        text-align: left;
+        input{
+            background-color: transparent;
+    border: 1px solid #eaeaea;
+    color: #333;
+    font-size: 14px;
+    height: 50px;
+    margin-bottom: 30px;
+    padding: 0 15px;
+        }
+        .btn-box{
+            .forgot-remember{
+                padding: 10px 0 19px;
+                input{
+                    height: 15px;
+                    margin: 0;
+                    position: relative;
+                    top: 1px;
+                    width: 17px;
+                }
+                label{
+                    color: #454545;
+                    font-size: 15px;
+                    font-weight: 400;
+                }
+                a{
+                    color: #454545;
+                    float: right;
+                    font-size: 15px;
+                    transition: all 0.3s ease 0s;
+                }
+            }
+            button{
+                background-color: #ff8b60;
+                border: medium none;
+                border-radius: 3px;
+                color: #fff;
+                cursor: pointer;
+                font-weight: 600;
+                line-height: 1;
+                padding: 13px 30px;
+                text-transform: uppercase;
+                transition: all 0.3s ease 0s;
+                &:hover{
+                    background-color: #ff5313;
+                    color: #fff;
+                }
+            }
+        }
+   }
+  
+}

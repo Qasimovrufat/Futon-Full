@@ -1,0 +1,62 @@
+﻿@using Futon.Models
+@{
+    List<Cart> Carts = new List<Cart>();
+    if (Session["Cart"] != null)
+    {
+        Carts = Session["Cart"] as List<Cart>;
+    }
+}
+<div class="cart-icon">
+    <a class="icon" href="@Url.Action("index","cart")">
+        <img src="~/Public/img/cart (1).png" alt="">
+        <div class="cart-text">
+            <span class="digit">Cart: @Carts.Sum(c=>c.Qty)</span>
+            <span class="total">@(Carts.Sum(c=>c.Qty*c.Price).ToString("#.##"))$</span>
+        </div>
+    </a>
+    <div class="cart-content">
+        <ul>
+            @foreach (var item in Carts)
+            {
+                <li class="single-cart" data-id="@item.Id">
+                    <div class="cart-image d-flex">
+                        <div class="img">
+                            <a href="">
+                                <img src="@item.Photo" alt="">
+                            </a>
+                            <span class="count">@item.Qty</span>
+                        </div>
+                    </div>
+                    <div class="cart-title">
+                        <h4>
+                            <a href="@Url.Action("index","product",new { id=item.Id , name=item.Name})">@item.Name </a>
+                        </h4>
+                        <span>@(item.Price.ToString("#.##"))$</span>
+                    </div>
+                    <div class="cart-delete float-right">
+                        <a href="">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </div>
+                </li>
+            }
+
+         
+
+        </ul>
+        <div class="cart-total d-flex justify-content-between">
+            <h4>
+                SUBTOTAL :
+
+            </h4>
+            <span class="shop-total">
+                @Carts.Sum(c=>c.Qty*c.Price).ToString("#.##")
+            </span>
+        </div>
+        <div class="cart-btn">
+            <a href="@Url.Action("index","checkout")">
+                checkout
+            </a>
+        </div>
+    </div>
+</div>

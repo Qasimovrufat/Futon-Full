@@ -1,0 +1,156 @@
+﻿@model Futon.Areas.Manage.Models.CreateProduct
+@{
+    ViewBag.Title = "Create";
+}
+<style>
+    option{
+        color:black;
+    }
+    .ck-editor__editable{
+        min-height : 250px;
+    }
+</style>
+
+<div class="content">
+    <div class="container-fluid">
+       
+
+            <div class="col-lg-12 col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-primary">
+                        <h4 class="card-title d-inline-block">Details</h4>
+
+                    </div>
+                    <div class="card-body table-responsive">
+                        <form autocomplete="off" action="/" method="post" id="infoForm">
+                            <div class="form-group">
+                                <label>Status</label>
+                                <select class="form-control" name="Status">
+
+                                    <option value="true">Active</option>
+                                    <option value="false">Deactive</option>
+                                </select>
+
+                            </div>
+                            <div class="form-group">
+                                <label>Name</label>
+                                <input type="text" class="form-control" name="Name">
+                            </div>
+                            <div class="form-group">
+                                <label>Department</label>
+                                <select class="form-control" name="DepartmentId">
+                                    <option style="color:black;"></option>
+
+                                    @foreach (var item in Model.Departments)
+                                    {
+                                        <option value="@item.Id">@item.Name</option>
+                                    }
+
+
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Categories</label>
+                                <select class="form-control disabled" name="CategoryId"></select>
+                            </div>
+                            <div class="form-group">
+                                <label>Brands</label>
+                                <select class="form-control" name="BrandId">
+                                    <option style="color:black;"></option>
+
+                                    @foreach (var item in Model.Brands)
+                                    {
+                                        <option value="@item.Id">@item.Name</option>
+                                    }
+
+
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Count</label>
+                                <input type="text" class="form-control" name="Count">
+                            </div>
+                            <div class="form-group">
+                                <label>Price</label>
+                                <input type="text" class="form-control" name="Price">
+                            </div>
+                            <div class="form-group">
+                                <label>DiscountPrice</label>
+                                <input type="text" class="form-control" name="DiscountPrice">
+                            </div>
+                            <div class="form-group">
+                                <label>Tags</label>
+                                <select class="form-control select2" name="Tags" id="Tags" multiple="multiple">
+
+
+                                    @foreach (var item in Model.Tags)
+                                    {
+                                        <option value="@item.Id">@item.Name</option>
+                                    }
+
+
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Colors</label>
+                                <select class="form-control select2" name="Colors" id="Colors" multiple="multiple">
+
+
+                                    @foreach (var item in Model.Colors)
+                                    {
+                                        <option value="@item.Id">@item.Name</option>
+                                    }
+
+
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Sizes</label>
+                                <select class="form-control select2" id="Sizes" name="Sizes" multiple="multiple">
+
+
+                                    @foreach (var item in Model.Sizes)
+                                    {
+                                        <option value="@item.Id">@item.Name</option>
+                                    }
+
+
+                                </select>
+                            </div>
+
+                        </form>
+                        <div class="form-group">
+                            <label>Description</label>
+                            <textarea name="Description" id="editor">
+                                
+                                </textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12 col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-primary">
+                        <h4 class="card-title d-inline-block">Photos</h4>
+
+                    </div>
+                    <div class="card-body table-responsive">
+                        <form action="@Url.Action("upload")" method="post" class="AjaxUpload">
+                            <div class="item">
+                                <label  class="btn" for="Upload">
+                                    Add Photo
+                                </label>
+                                <input id="Upload" type="file" multiple />
+                            </div>
+                            <ul class="photos"></ul>
+                        </form>
+
+                        <button type="button" class="btn btn-success CreateProduct">Add Product</button>
+                    </div>
+                </div>
+            </div>
+       
+    </div>
+</div>
+

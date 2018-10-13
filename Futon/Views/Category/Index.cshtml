@@ -1,0 +1,254 @@
+﻿@model Futon.Models.ViewCategory
+@using Futon.Models
+
+@{
+    ViewBag.Title = Model.category.Name;
+}
+
+<div class="container">
+    <!-- Page title -->
+    <div class="page-title">
+        <ul>
+            <li>
+                <a href="@Url.Action("index","home")">Home</a>
+                <i class="fa fa-angle-right"></i>
+            </li>
+            <li class="active-color">@Model.category.Name</li>
+        </ul>
+    </div>
+    <!-- End Page title -->
+    <!-- Shop Area -->
+    <div class="shop-area">
+        <div class="content-wrapper">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="product-sidebar">
+                        <div class="title">
+                            <h3>Search Products</h3>
+                        </div>
+                        <div class="shop-search">
+                            <form action="">
+                                <input type="text" name="key" value="@(Model.Key!=null?Model.Key:"")" placeholder="Find a product">
+                                <button type="submit">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="product-sidebar">
+                        <div class="shop-widget">
+                            <div class="title">
+                                <h3>Filter By Price</h3>
+                            </div>
+                            <div id="slider-range"
+                                 data-max="@Model.Max.ToString("#.##")"
+                                 data-min="@Model.Min.ToString("#.##")"
+                                 data-sltmin=" @(Model.SltMin!=-1?Model.SltMin.ToString("#.##"):Model.Min.ToString("#.##"))"
+                                 data-sltmax=" @(Model.SltMax!=-1?Model.SltMax.ToString("#.##"):Model.Max.ToString("#.##"))"></div>
+                            <div class="price_slider_amount">
+                                <div class="label-input">
+                                    <label>price : </label>
+                                    <input type="text" id="amount" name="range" placeholder="Add Your Price" />
+                                </div>
+                                <button class="submitRange" type="button">Filter</button>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="single-banner">
+                        <div class="overlay"></div>
+                        <div class="img">
+                            <img src="img/banner-10.png" alt="">
+                            <div class="borderUpDown"></div>
+                            <div class="borderSide"></div>
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="col-lg-9">
+                    <div class="shop-topbar">
+                        <div class="product-sorting">
+                            <label for="">
+                                Showing
+                                <span>1-@Model.Limit</span>
+                                of
+                                <span>@Model.category.Products.Count()</span>
+                                Results
+                            </label>
+                            <select class="limit">
+                                <option @(Model.Limit == 12 ? "selected" : "") value="12">12</option>
+                                <option @(Model.Limit == 24 ? "selected" : "") value="24">24</option>
+                                <option @(Model.Limit == 36 ? "selected" : "") value="36">36</option>
+                            </select>
+                        </div>
+                        <div class="grid-options">
+                            <ul>
+                                <li class="view-grid active-color" data-view="product-grid">
+
+                                    <i class="fa fa-th"></i>
+
+                                </li>
+                                <li class="view-list" data-view="product-list">
+
+                                    <i class="fa fa-list"></i>
+
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                    <div class="grid-product-wrapper">
+                        <div class="product-view product-grid">
+                            <div class="row">
+                                @foreach (var product in Model.products)
+                                {
+                                    <div class="product-width col-lg-4 col-xl-4 col-md-4">
+                                        <div class="product-wrapper">
+                                            <div class="product-img">
+                                                <a href="@Url.Action("index","product",new {id=product.Id, name = product.Name })">
+                                                    @{
+                                                        var first = product.Photos.Where(p => p.OrderBy == 1).FirstOrDefault().Path;
+                                                        var second = product.Photos.Where(p => p.OrderBy == 2).FirstOrDefault().Path;
+                                                    }
+                                                    <img src="~/Uploads/Products/@first" alt="@product.Name" class="primary">
+                                                    <img src="~/Uploads/Products/@second" alt="@product.Name" class="secondary">
+                                                </a>
+                                                <div class="quick-view">
+                                                    <a href="" data-toggle="modal" data-target="#myModal">Quick view</a>
+                                                </div>
+                                                @if (product.DiscountPrice != null)
+                                                {
+                                                    <span class="sale-text">Sale</span>
+                                                }
+                                            </div>
+                                            <div class="product-content text-center">
+                                                <h4>
+                                                    <a href="@Url.Action("index","product",new {id=product.Id, name = product.Name })">
+                                                        @product.Name
+                                                    </a>
+                                                </h4>
+                                                @{
+                                                    int starCount = 0;
+                                                    if (product.Reviews.Count > 0)
+                                                    {
+                                                        starCount = (int)Math.Ceiling((decimal)product.Reviews.Average(f => f.Rate));
+
+                                                    }
+
+                                                }
+                                                <div class="rating">
+                                                    @for (int i = 0; i < starCount; i++)
+                                                    {
+                                                        <i class="fa fa-star"></i>
+                                                    }
+
+                                                </div>
+                                                <div class="price">
+                                                    @if (product.DiscountPrice != null)
+                                                    {
+                                                        var discount = product.DiscountPrice.Value.ToString("0.00");
+                                                        <span class="product-price-old">@product.Price.ToString("0.00")$</span>
+
+                                                        <span>@(discount)$</span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span>@product.Price.ToString("0.00")$</span>
+                                                    }
+                                                </div>
+                                                <div class="product-action text-center" data-id="@product.Id">
+                                                    <a href="" class="add-cart">
+                                                        Add to Cart
+                                                        <img src="~/Public/img/cart-2.png" alt="">
+                                                    </a>
+
+                                                </div>
+
+                                            </div>
+                                            <div class="product-list-content">
+                                                <h4><a href="@Url.Action("index","product",new {id=product.Id, name = product.Name })">@product.Name</a></h4>
+
+                                                <div class="rating">
+                                                    @for (int i = 0; i < starCount; i++)
+                                                    {
+                                                        <i class="fa fa-star"></i>
+                                                    }
+                                                </div>
+                                                <div class="price">
+                                                    @if (product.DiscountPrice != null)
+                                                    {
+                                                        var discount = product.DiscountPrice.Value.ToString("0.00");
+                                                        <span class="product-price-old">@product.Price.ToString("0.00")</span>
+
+                                                        <span>@discount</span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span>@product.Price.ToString("0.00")</span>
+                                                    }
+                                                </div>
+                                                @if (product.Description != null)
+                                                {
+                                                    <p>@(product.Description.Length > 201 ? @product.Description.Substring(0, 201) : @product.Description)</p>
+                                                }
+
+                                                <div class="product-action-list" data-id="@product.Id">
+                                                    <a href="" class="action-cart add-cart" data-tooltip="Add To Card" data-id="@product.Id">
+                                                        Add to Cart
+                                                        <img src="img/cart-2.png" alt="">
+                                                    </a>
+                                                    <a href="" data-tooltip="Wishlist" class="wishlist tooltip-coustom" data-id="@product.Id">
+                                                        <i class="fa fa-heart"></i>
+                                                    </a>
+                                                 
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+
+
+                            </div>
+                            <!--Pagination-->
+                            <nav aria-label="pagination example " class="pagination float-right">
+                                <ul class="pagination pagination-lg">
+
+                                    <!--Arrow left-->
+                                    @if (Model.Page > 1)
+                                    {
+                                        <li class="page-item">
+                                            <a class="page-link" href="@Url.Action("index", new {page=Model.Page-1, limit = Model.Limit  })" aria-label="Previous">
+                                                <i class="fa fa-angle-left"></i>
+                                            </a>
+                                        </li>
+                                    }
+
+                                    @for (var i = 0; i < Model.Total; i++)
+                                    {
+                                        <li class="page-item "><a class="page-link @((i+1)==Model.Page?"active-color":"")" href="@Url.Action("index",new {page = i+1,limit = Model.Limit  })">@(i + 1)</a></li>
+                                    }
+                                    <!--Numbers-->
+                                    <!--Arrow right-->
+                                    @if (Model.Total != Model.Page)
+                                    {
+                                        <li class="page-item">
+                                            <a class="page-link" href="@Url.Action("index",new {page=Model.Page+1, limit = Model.Limit  })" aria-label="Next">
+                                                <i class="fa fa-angle-right"></i>
+                                            </a>
+                                        </li>
+                                    }
+
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Shop Area -->
+</div>
+

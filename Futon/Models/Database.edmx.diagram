@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="812815b9328c4c7086962891c81191c3" Name="Diagram1">
+        <EntityTypeShape EntityType="FutonModel.AdLocation" Width="1.5" PointX="10.75" PointY="1.125" />
+        <EntityTypeShape EntityType="FutonModel.Admin" Width="1.5" PointX="0.75" PointY="8.75" />
+        <EntityTypeShape EntityType="FutonModel.Ad" Width="1.5" PointX="13" PointY="0.875" />
+        <EntityTypeShape EntityType="FutonModel.Brand" Width="1.5" PointX="3" PointY="3" />
+        <EntityTypeShape EntityType="FutonModel.Category" Width="1.5" PointX="3" PointY="6" />
+        <EntityTypeShape EntityType="FutonModel.Color" Width="1.5" PointX="8.25" PointY="0.875" />
+        <EntityTypeShape EntityType="FutonModel.Department" Width="1.5" PointX="0.75" PointY="6.125" />
+        <EntityTypeShape EntityType="FutonModel.Photo" Width="1.5" PointX="7.5" PointY="13.25" />
+        <EntityTypeShape EntityType="FutonModel.ProductColorSize" Width="1.5" PointX="10.5" PointY="5.75" />
+        <EntityTypeShape EntityType="FutonModel.Product" Width="1.5" PointX="5.25" PointY="4.75" />
+        <EntityTypeShape EntityType="FutonModel.ProductTag" Width="1.5" PointX="7.5" PointY="4" />
+        <EntityTypeShape EntityType="FutonModel.Review" Width="1.5" PointX="7.5" PointY="7" />
+        <EntityTypeShape EntityType="FutonModel.Setting" Width="1.5" PointX="2.75" PointY="10.75" />
+        <EntityTypeShape EntityType="FutonModel.Size" Width="1.5" PointX="8.25" PointY="10.375" />
+        <EntityTypeShape EntityType="FutonModel.Tag" Width="1.5" PointX="5.25" PointY="2.125" />
+        <AssociationConnector Association="FutonModel.FK_Ads_AdLocation1" />
+        <AssociationConnector Association="FutonModel.FK_Products_Brands" />
+        <AssociationConnector Association="FutonModel.FK_Categories_Department" />
+        <AssociationConnector Association="FutonModel.FK_Products_Categories" />
+        <AssociationConnector Association="FutonModel.FK_ProductColorSize_Color" />
+        <AssociationConnector Association="FutonModel.FK_Photos_Products" />
+        <AssociationConnector Association="FutonModel.FK_ProductColorSize_Products" />
+        <AssociationConnector Association="FutonModel.FK_ProductColorSize_Size" />
+        <AssociationConnector Association="FutonModel.FK_ProductTags_Products" />
+        <AssociationConnector Association="FutonModel.FK_Reviews_Products" />
+        <AssociationConnector Association="FutonModel.FK_ProductTags_Tags" />
+        <EntityTypeShape EntityType="FutonModel.User" Width="1.5" PointX="10.375" PointY="9.75" />
+        <EntityTypeShape EntityType="FutonModel.Slide" Width="1.5" PointX="12.375" PointY="9.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewBag.Title = "Create";
+}
+
+<div class="content">
+    <div class="container-fluid">
+
+
+        <div class="col-lg-12 col-md-12">
+            <div class="card">
+                <div class="card-header card-header-primary">
+                    <h4 class="card-title d-inline-block">Create</h4>
+
+                </div>
+                <div class="card-body table-responsive">
+                    <form autocomplete="off" action="@Url.Action("create")" method="post" id="infoForm" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label>Name</label>
+                            <input type="text" class="form-control" name="Name">
+                        </div>
+                       
+
+                        <div class="">
+                            <label>Photo</label>
+                            <input class="photo" style="display:block;" type="file" name="Photo">
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="img">
+                                <img width="250" id="img" src="" alt="" />
+                            </div>
+                        </div>
+                        <button type="submit" class=" btn btn-info">Create</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>

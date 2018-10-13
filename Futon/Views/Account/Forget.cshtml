@@ -1,0 +1,82 @@
+﻿
+
+
+<div class="container">
+    <!-- Page title -->
+    <div class="page-title">
+        <ul>
+            <li>
+                <a href="@Url.Action("index","home")">Home</a>
+                <i class="fa fa-angle-right"></i>
+            </li>
+            <li class="active-color">Login / Register</li>
+        </ul>
+    </div>
+
+    <!-- login area -->
+    <div class="login-area">
+        <div class="row">
+            <div class="col-lg-7 col-md-12 mr-auto ml-auto">
+                <div class="login-wrapper">
+                    <div class="login-tab-list">
+                        <a href="#lg1">
+                            <h4> Forget Password </h4>
+                        </a>
+                    
+                    </div>
+                    <div class="login-register">
+                        <div class="tab-pane active" id="lg1">
+                            <div class="login-form-container">
+                                @if (Session["message"] != null)
+                                {
+                                    <div class="alert alert-info">
+                                        @Session["message"]
+                                    </div>
+
+                                    Session["message"] = null;
+                                }
+
+                                    <form action="@Url.Action("forget","account")">
+                                        <div class="form-group">
+                                            <input type="email" name="email" placeholder="E-Poçt"
+                                                   data-validation="server"
+                                                   data-validation-url="@Url.Action("checkmail","account",new { type=2 })">
+                                        </div>
+                                        <div class="btn-box">
+
+                                            <button class="btn">Confirm</button>
+                                        </div>
+                                        @if (Session["LoginError"] != null)
+                                        {
+                                            <br />
+                                            <br />
+                                            <div class="alert alert-danger">
+                                                @Session["LoginError"]
+                                            </div>
+
+                                            Session["LoginError"] = null;
+                                        }
+                                    </form>
+                            </div>
+                        </div>
+                     
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section script{
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $.validate({
+                modules: 'security',
+               
+            });
+        })
+    </script>
+
+
+
+}

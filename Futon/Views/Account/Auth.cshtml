@@ -1,0 +1,130 @@
+﻿
+
+<div class="container">
+    <!-- Page title -->
+    <div class="page-title">
+        <ul>
+            <li>
+                <a href="@Url.Action("index","home")">Home</a>
+                <i class="fa fa-angle-right"></i>
+            </li>
+            <li class="active-color">Login / Register</li>
+        </ul>
+    </div>
+
+    <!-- login area -->
+    <div class="login-area">
+        <div class="row">
+            <div class="col-lg-7 col-md-12 mr-auto ml-auto">
+                <div class="login-wrapper">
+                    <div class="login-tab-list">
+                        <a href="#lg1">
+                            <h4> login </h4>
+                        </a>
+                        <a href="#lg2">
+                            <h4>Register</h4>
+                        </a>
+                    </div>
+                    <div class="login-register">
+                        <div class="tab-pane active" id="lg1">
+                            @if (Session["success"] != null)
+                            {
+                                <br />
+                                <br />
+                                <div class="alert alert-success">
+                                    @Session["success"]
+                                </div>
+
+                                Session["success"] = null;
+                            }
+                            <div class="login-form-container">
+                                <form action="@Url.Action("login","Account")" method="post">
+                                    <input type="text" name="Email" placeholder="Username">
+                                    <input type="password" name="Password" placeholder="Password">
+                                    <div class="btn-box">
+                                        <div class="forgot-remember">
+
+                                            <a href="@Url.Action("forget","account")">Forgot Password?</a>
+                                        </div>
+                                        <button type="submit" class="btn">Login</button>
+                                    </div>
+                                    @if (Session["LoginError"] != null)
+                                    {
+                                        <br />
+                                        <br />
+                                        <div class="alert alert-danger">
+                                            @Session["LoginError"]
+                                        </div>
+
+                                        Session["LoginError"] = null;
+                                    }
+                                </form>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="lg2">
+                            <div class="login-form-container">
+                                <form action="@Url.Action("register","account")">
+                                    <div class="form-group">
+                                        <input type="text" name="Username" placeholder="Username"
+                                               data-validation="required"
+                                               data-validation-error-msg="Username is required">
+                                        
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" name="Email" placeholder="Email"
+                                               data-validation="server"
+                                               data-validation-url="@Url.Action("checkmail","account")">
+                                        
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" name="Password" id="regPass" placeholder="Password"
+                                               data-validation="strength"
+                                               data-validation-strength="2">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" name="re-password" placeholder="Confirm password"
+                                               data-validation="confirmation"
+                                               data-validation-confirm="Password"
+                                               data-validation-error-msg="Passwords are not same">
+                                    </div>
+                                    <div class="btn-box">
+                                        <button type="submit" class="btn">Register</button>
+                                    </div>
+                                    @if (Session["loginerror"] != null)
+                                    {
+                                    <div class=" alert alert-danger"> @Session["loginerror"]</div>
+                                    }
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section script{
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $.validate({
+                modules: 'security',
+                onModulesLoaded: function () {
+                    var optionalConfig = {
+                        fontSize: '12pt',
+                        padding: '4px',
+                        bad: 'Bad',
+                        weak: 'Weak',
+                        good: 'Good',
+                        strong: 'Strong'
+                    };
+
+                    $('#regPass').displayPasswordStrength(optionalConfig);
+                }
+            });
+        })
+    </script>
+
+
+
+}

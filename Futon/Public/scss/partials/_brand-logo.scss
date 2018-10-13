@@ -1,0 +1,43 @@
+.brand-logo{
+    margin-bottom: 30px;
+    .owl-nav{
+        display: block !important;
+    }
+    &:hover .owl-nav .owl-prev{
+        opacity: 1;
+        visibility: visible;
+    }
+    &:hover .owl-nav .owl-next{
+        opacity: 1;
+        visibility: visible;
+    }
+    .owl-nav .owl-prev,.owl-next{
+        background-color: #d2d2d2 !important;
+    border: 1px solid #bfbfbf !important;
+    color: #fff !important;
+    border-radius: 3px;
+    font-size: 20px !important;
+    height: 25px;
+    left: 0px;
+    line-height: 20px !important;
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: all 0.3s ease 0s;
+    width: 25px;
+    opacity: 0;
+    visibility: hidden;
+    &:focus{
+        outline: none;
+    }
+    &:hover{
+        background-color: #ff5313 !important;
+        border-color: #ff5313 !important;
+    }
+    }
+    .owl-next{
+        left: auto;
+    right: 0px;
+    }
+}

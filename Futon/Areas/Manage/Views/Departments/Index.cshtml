@@ -1,0 +1,67 @@
+﻿@model IEnumerable<Futon.Models.Department>
+
+@{
+    ViewBag.Title = "Categories";
+}
+<div class="content">
+    <div class="container-fluid">
+        <div class="col-lg-12 col-md-12">
+            <div class="card">
+                <div class="card-header card-header-primary">
+                    <h4 class="card-title d-inline-block">Departments</h4>
+
+                    <a href=" @Url.Action("create")" class="btn btn-info float-right">Add Department</a>
+                </div>
+                <div class="card-body table-responsive">
+                    <div class="col-lg-4">
+                       
+                    </div>
+                    <table class="table table-hover">
+                        <thead class="text-warning">
+                        <th> @Html.DisplayNameFor(model => model.Name)</th>
+                       
+
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Name)
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                                        <a href="@Url.Action("Delete",new { id = item.Id })" onclick="return confirm('are you sure?')">Delete</a>
+                                    
+                                    </td>
+                                </tr>
+                            }
+
+
+                        </tbody>
+                    </table>
+                  
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

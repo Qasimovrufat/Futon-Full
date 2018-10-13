@@ -1,0 +1,54 @@
+﻿@model Futon.Areas.Manage.Models.ViewManageCategory
+@{
+    ViewBag.Title = "Edit";
+}
+<style>
+    option {
+        color: black;
+    }
+
+    .ck-editor__editable {
+        min-height: 250px;
+    }
+</style>
+<div class="content">
+    <div class="container-fluid">
+
+
+        <div class="col-lg-12 col-md-12">
+            <div class="card">
+                <div class="card-header card-header-primary">
+                    <h4 class="card-title d-inline-block">Edit</h4>
+
+                </div>
+                <div class="card-body table-responsive">
+                    <form autocomplete="off" action="@Url.Action("edit","categories")" method="post" id="infoForm">
+                        <div class="form-group">
+                            <label>Name</label>
+                            <input type="text" value="@Model.category.Name" class="form-control" name="Name">
+                        </div>
+                        <div class="form-group">
+                            <label>Department</label>
+                            <select class="form-control" name="DepartmentId">
+                                <option style="color:black;"></option>
+
+                                @foreach (var item in Model.departments)
+                                {
+                                    <option @(Model.category.DepartmentId==item.Id?"selected":"") value="@item.Id">@item.Name</option>
+                                }
+
+
+                            </select>
+                        </div>
+                        <button type="submit" class=" btn btn-info">Edit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+
+

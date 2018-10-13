@@ -1,0 +1,94 @@
+.contact-area{
+    padding-bottom: 40px;
+    padding-top: 80px;
+    .contact-wrapper{
+        background-color: #fff;
+    border: 1px solid #eaeaea;
+    overflow: hidden;
+    padding: 40px 15px 34px;
+    margin-bottom: 30px;
+    &:hover i{
+        border: 2px solid #ff5313;
+        background-color: #ff5313;
+        color: #fff;
+    }
+    .icon{
+        margin-bottom: 20px;
+        i{
+            border: 2px solid #ff5313;
+            border-radius: 50px;
+            color: #ff5313;
+            display: inline-block;
+            font-size: 30px;
+            height: 60px;
+            line-height: 55px;
+            transition: all 0.3s ease 0s;
+            width: 60px;
+        }
+    }
+    .content{
+        h4{
+            color: #434343;
+            font-family: "Open Sans", sans-serif;
+            font-size: 17px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            text-transform: capitalize;
+        }
+        p{
+            font-size: 15px;
+            font-weight: 400;
+            margin-bottom: 3px;
+        }
+    }
+    }
+    .message-wrapper{
+        margin-top: 35px;
+    margin-bottom: 70px;
+    h4{
+        color: #434343;
+        font-family: "Open Sans", sans-serif;
+        font-size: 20px;
+        font-weight: 600;
+        margin: 0 0 20px;
+    }
+    .col-lg-6, .col-lg-12{
+        margin-bottom: 20px;
+        input{
+            background: #fff none repeat scroll 0 0;
+            border: 1px solid #eaeaea;
+            color: #454545;
+            height: 45px;
+            padding-left: 20px;
+            font-size: 14px;
+            letter-spacing: .2px;
+        }
+        textarea{
+            height: 250px;
+            padding: 20px 20px;
+            border: 1px solid #eaeaea;
+            width: 100%;
+            resize: vertical;
+        }
+        button{
+            background-color: #ff5313;
+    border: medium none;
+    cursor: pointer;
+    margin-top: 30px;
+    color: #fff;
+    font-weight: 600;
+    border-radius: 3px;
+    padding: 14px 20px 12px;
+    transition: all 0.3s ease 0s;
+    &:hover{
+        background-color: #242424;
+    }
+        }
+    }
+    }
+}
+
+#map {
+    height: 500px;
+    width: 100%;
+}

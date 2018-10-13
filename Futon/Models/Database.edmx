@@ -1,0 +1,968 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="FutonModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AdLocation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Admins">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fullname" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="Ads">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Photo" Type="nvarchar" MaxLength="50" />
+          <Property Name="Url" Type="nvarchar" MaxLength="150" />
+          <Property Name="LocationId" Type="int" />
+        </EntityType>
+        <EntityType Name="Brands">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Logo" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Categories">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DepartmentId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Color">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="HexCode" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Photos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductId" Type="int" />
+          <Property Name="Path" Type="nvarchar" MaxLength="250" />
+          <Property Name="IsProfile" Type="bit" />
+          <Property Name="OrderBy" Type="int" />
+        </EntityType>
+        <EntityType Name="ProductColorSize">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ColorId" Type="int" />
+          <Property Name="SizeId" Type="int" />
+          <Property Name="ProductId" Type="int" />
+        </EntityType>
+        <EntityType Name="Products">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Count" Type="int" Nullable="false" />
+          <Property Name="Status" Type="bit" Nullable="false" />
+          <Property Name="Price" Type="money" Nullable="false" />
+          <Property Name="DiscountPrice" Type="money" />
+          <Property Name="CategoryId" Type="int" Nullable="false" />
+          <Property Name="Description" Type="ntext" />
+          <Property Name="BrandId" Type="int" Nullable="false" />
+          <Property Name="CreatedAt" Type="datetime" />
+          <Property Name="view" Type="int" />
+        </EntityType>
+        <EntityType Name="ProductTags">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TagId" Type="int" />
+          <Property Name="ProductId" Type="int" />
+        </EntityType>
+        <EntityType Name="Reviews">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Text" Type="ntext" />
+          <Property Name="Rate" Type="tinyint" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedAt" Type="datetime" />
+          <Property Name="ProductId" Type="int" />
+        </EntityType>
+        <EntityType Name="Settings">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="logo" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="80" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="Facebook" Type="nvarchar" MaxLength="100" />
+          <Property Name="Twitter" Type="nvarchar" MaxLength="150" />
+          <Property Name="Tumblr" Type="nvarchar" MaxLength="50" />
+          <Property Name="Adress" Type="nvarchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="Size">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Slides">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Photo" Type="nvarchar" MaxLength="50" />
+          <Property Name="Slogan" Type="nvarchar" MaxLength="50" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" />
+          <Property Name="Text" Type="nvarchar" MaxLength="250" />
+          <Property Name="Url" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Tags">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" MaxLength="150" />
+          <Property Name="Email" Type="nvarchar" MaxLength="70" />
+          <Property Name="IsAccepted" Type="bit" Nullable="false" />
+          <Property Name="Token" Type="nvarchar" MaxLength="250" />
+          <Property Name="ForgetToken" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <Association Name="FK_Ads_AdLocation1">
+          <End Role="AdLocation" Type="Self.AdLocation" Multiplicity="0..1" />
+          <End Role="Ads" Type="Self.Ads" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AdLocation">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ads">
+              <PropertyRef Name="LocationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Categories_Department">
+          <End Role="Department" Type="Self.Department" Multiplicity="1" />
+          <End Role="Categories" Type="Self.Categories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Categories">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Photos_Products">
+          <End Role="Products" Type="Self.Products" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Photos" Type="Self.Photos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Photos">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductColorSize_Color">
+          <End Role="Color" Type="Self.Color" Multiplicity="0..1" />
+          <End Role="ProductColorSize" Type="Self.ProductColorSize" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Color">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductColorSize">
+              <PropertyRef Name="ColorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductColorSize_Products">
+          <End Role="Products" Type="Self.Products" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ProductColorSize" Type="Self.ProductColorSize" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductColorSize">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductColorSize_Size">
+          <End Role="Size" Type="Self.Size" Multiplicity="0..1" />
+          <End Role="ProductColorSize" Type="Self.ProductColorSize" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Size">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductColorSize">
+              <PropertyRef Name="SizeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_Brands">
+          <End Role="Brands" Type="Self.Brands" Multiplicity="1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Brands">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="BrandId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_Categories">
+          <End Role="Categories" Type="Self.Categories" Multiplicity="1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductTags_Products">
+          <End Role="Products" Type="Self.Products" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ProductTags" Type="Self.ProductTags" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductTags">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductTags_Tags">
+          <End Role="Tags" Type="Self.Tags" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ProductTags" Type="Self.ProductTags" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tags">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductTags">
+              <PropertyRef Name="TagId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reviews_Products">
+          <End Role="Products" Type="Self.Products" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Reviews" Type="Self.Reviews" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Reviews">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FutonModelStoreContainer">
+          <EntitySet Name="AdLocation" EntityType="Self.AdLocation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Admins" EntityType="Self.Admins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ads" EntityType="Self.Ads" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Brands" EntityType="Self.Brands" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Color" EntityType="Self.Color" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Photos" EntityType="Self.Photos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductColorSize" EntityType="Self.ProductColorSize" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductTags" EntityType="Self.ProductTags" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reviews" EntityType="Self.Reviews" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Settings" EntityType="Self.Settings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Size" EntityType="Self.Size" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Slides" EntityType="Self.Slides" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tags" EntityType="Self.Tags" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Ads_AdLocation1" Association="Self.FK_Ads_AdLocation1">
+            <End Role="AdLocation" EntitySet="AdLocation" />
+            <End Role="Ads" EntitySet="Ads" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Categories_Department" Association="Self.FK_Categories_Department">
+            <End Role="Department" EntitySet="Department" />
+            <End Role="Categories" EntitySet="Categories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Photos_Products" Association="Self.FK_Photos_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Photos" EntitySet="Photos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductColorSize_Color" Association="Self.FK_ProductColorSize_Color">
+            <End Role="Color" EntitySet="Color" />
+            <End Role="ProductColorSize" EntitySet="ProductColorSize" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductColorSize_Products" Association="Self.FK_ProductColorSize_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="ProductColorSize" EntitySet="ProductColorSize" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductColorSize_Size" Association="Self.FK_ProductColorSize_Size">
+            <End Role="Size" EntitySet="Size" />
+            <End Role="ProductColorSize" EntitySet="ProductColorSize" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_Brands" Association="Self.FK_Products_Brands">
+            <End Role="Brands" EntitySet="Brands" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_Categories" Association="Self.FK_Products_Categories">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductTags_Products" Association="Self.FK_ProductTags_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="ProductTags" EntitySet="ProductTags" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductTags_Tags" Association="Self.FK_ProductTags_Tags">
+            <End Role="Tags" EntitySet="Tags" />
+            <End Role="ProductTags" EntitySet="ProductTags" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reviews_Products" Association="Self.FK_Reviews_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Reviews" EntitySet="Reviews" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FutonModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="FutonEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AdLocations" EntityType="FutonModel.AdLocation" />
+          <EntitySet Name="Admins" EntityType="FutonModel.Admin" />
+          <EntitySet Name="Ads" EntityType="FutonModel.Ad" />
+          <EntitySet Name="Brands" EntityType="FutonModel.Brand" />
+          <EntitySet Name="Categories" EntityType="FutonModel.Category" />
+          <EntitySet Name="Colors" EntityType="FutonModel.Color" />
+          <EntitySet Name="Departments" EntityType="FutonModel.Department" />
+          <EntitySet Name="Photos" EntityType="FutonModel.Photo" />
+          <EntitySet Name="ProductColorSizes" EntityType="FutonModel.ProductColorSize" />
+          <EntitySet Name="Products" EntityType="FutonModel.Product" />
+          <EntitySet Name="ProductTags" EntityType="FutonModel.ProductTag" />
+          <EntitySet Name="Reviews" EntityType="FutonModel.Review" />
+          <EntitySet Name="Settings" EntityType="FutonModel.Setting" />
+          <EntitySet Name="Sizes" EntityType="FutonModel.Size" />
+          <EntitySet Name="Tags" EntityType="FutonModel.Tag" />
+          <AssociationSet Name="FK_Ads_AdLocation1" Association="FutonModel.FK_Ads_AdLocation1">
+            <End Role="AdLocation" EntitySet="AdLocations" />
+            <End Role="Ad" EntitySet="Ads" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_Brands" Association="FutonModel.FK_Products_Brands">
+            <End Role="Brand" EntitySet="Brands" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Categories_Department" Association="FutonModel.FK_Categories_Department">
+            <End Role="Department" EntitySet="Departments" />
+            <End Role="Category" EntitySet="Categories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_Categories" Association="FutonModel.FK_Products_Categories">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductColorSize_Color" Association="FutonModel.FK_ProductColorSize_Color">
+            <End Role="Color" EntitySet="Colors" />
+            <End Role="ProductColorSize" EntitySet="ProductColorSizes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Photos_Products" Association="FutonModel.FK_Photos_Products">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="Photo" EntitySet="Photos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductColorSize_Products" Association="FutonModel.FK_ProductColorSize_Products">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="ProductColorSize" EntitySet="ProductColorSizes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductColorSize_Size" Association="FutonModel.FK_ProductColorSize_Size">
+            <End Role="Size" EntitySet="Sizes" />
+            <End Role="ProductColorSize" EntitySet="ProductColorSizes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductTags_Products" Association="FutonModel.FK_ProductTags_Products">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="ProductTag" EntitySet="ProductTags" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reviews_Products" Association="FutonModel.FK_Reviews_Products">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="Review" EntitySet="Reviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductTags_Tags" Association="FutonModel.FK_ProductTags_Tags">
+            <End Role="Tag" EntitySet="Tags" />
+            <End Role="ProductTag" EntitySet="ProductTags" />
+          </AssociationSet>
+          <EntitySet Name="Users" EntityType="FutonModel.User" />
+          <EntitySet Name="Slides" EntityType="FutonModel.Slide" />
+        </EntityContainer>
+        <EntityType Name="AdLocation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Ads" Relationship="FutonModel.FK_Ads_AdLocation1" FromRole="AdLocation" ToRole="Ad" />
+        </EntityType>
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fullname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Ad">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Photo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Url" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="LocationId" Type="Int32" />
+          <NavigationProperty Name="AdLocation" Relationship="FutonModel.FK_Ads_AdLocation1" FromRole="Ad" ToRole="AdLocation" />
+        </EntityType>
+        <EntityType Name="Brand">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Logo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Products" Relationship="FutonModel.FK_Products_Brands" FromRole="Brand" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DepartmentId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Department" Relationship="FutonModel.FK_Categories_Department" FromRole="Category" ToRole="Department" />
+          <NavigationProperty Name="Products" Relationship="FutonModel.FK_Products_Categories" FromRole="Category" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Color">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="HexCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ProductColorSizes" Relationship="FutonModel.FK_ProductColorSize_Color" FromRole="Color" ToRole="ProductColorSize" />
+        </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Categories" Relationship="FutonModel.FK_Categories_Department" FromRole="Department" ToRole="Category" />
+        </EntityType>
+        <EntityType Name="Photo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductId" Type="Int32" />
+          <Property Name="Path" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="IsProfile" Type="Boolean" />
+          <Property Name="OrderBy" Type="Int32" />
+          <NavigationProperty Name="Product" Relationship="FutonModel.FK_Photos_Products" FromRole="Photo" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="ProductColorSize">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ColorId" Type="Int32" />
+          <Property Name="SizeId" Type="Int32" />
+          <Property Name="ProductId" Type="Int32" />
+          <NavigationProperty Name="Color" Relationship="FutonModel.FK_ProductColorSize_Color" FromRole="ProductColorSize" ToRole="Color" />
+          <NavigationProperty Name="Product" Relationship="FutonModel.FK_ProductColorSize_Products" FromRole="ProductColorSize" ToRole="Product" />
+          <NavigationProperty Name="Size" Relationship="FutonModel.FK_ProductColorSize_Size" FromRole="ProductColorSize" ToRole="Size" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Count" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="DiscountPrice" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="CategoryId" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BrandId" Type="Int32" Nullable="false" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="3" />
+          <Property Name="view" Type="Int32" />
+          <NavigationProperty Name="Brand" Relationship="FutonModel.FK_Products_Brands" FromRole="Product" ToRole="Brand" />
+          <NavigationProperty Name="Category" Relationship="FutonModel.FK_Products_Categories" FromRole="Product" ToRole="Category" />
+          <NavigationProperty Name="Photos" Relationship="FutonModel.FK_Photos_Products" FromRole="Product" ToRole="Photo" />
+          <NavigationProperty Name="ProductColorSizes" Relationship="FutonModel.FK_ProductColorSize_Products" FromRole="Product" ToRole="ProductColorSize" />
+          <NavigationProperty Name="ProductTags" Relationship="FutonModel.FK_ProductTags_Products" FromRole="Product" ToRole="ProductTag" />
+          <NavigationProperty Name="Reviews" Relationship="FutonModel.FK_Reviews_Products" FromRole="Product" ToRole="Review" />
+        </EntityType>
+        <EntityType Name="ProductTag">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TagId" Type="Int32" />
+          <Property Name="ProductId" Type="Int32" />
+          <NavigationProperty Name="Product" Relationship="FutonModel.FK_ProductTags_Products" FromRole="ProductTag" ToRole="Product" />
+          <NavigationProperty Name="Tag" Relationship="FutonModel.FK_ProductTags_Tags" FromRole="ProductTag" ToRole="Tag" />
+        </EntityType>
+        <EntityType Name="Review">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Rate" Type="Byte" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="3" />
+          <Property Name="ProductId" Type="Int32" />
+          <NavigationProperty Name="Product" Relationship="FutonModel.FK_Reviews_Products" FromRole="Review" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Setting">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="logo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Facebook" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Twitter" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Tumblr" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Adress" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Size">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="ProductColorSizes" Relationship="FutonModel.FK_ProductColorSize_Size" FromRole="Size" ToRole="ProductColorSize" />
+        </EntityType>
+        <EntityType Name="Tag">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ProductTags" Relationship="FutonModel.FK_ProductTags_Tags" FromRole="Tag" ToRole="ProductTag" />
+        </EntityType>
+        <Association Name="FK_Ads_AdLocation1">
+          <End Type="FutonModel.AdLocation" Role="AdLocation" Multiplicity="0..1" />
+          <End Type="FutonModel.Ad" Role="Ad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AdLocation">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ad">
+              <PropertyRef Name="LocationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_Brands">
+          <End Type="FutonModel.Brand" Role="Brand" Multiplicity="1" />
+          <End Type="FutonModel.Product" Role="Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Brand">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="BrandId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Categories_Department">
+          <End Type="FutonModel.Department" Role="Department" Multiplicity="1" />
+          <End Type="FutonModel.Category" Role="Category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Category">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_Categories">
+          <End Type="FutonModel.Category" Role="Category" Multiplicity="1" />
+          <End Type="FutonModel.Product" Role="Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductColorSize_Color">
+          <End Type="FutonModel.Color" Role="Color" Multiplicity="0..1" />
+          <End Type="FutonModel.ProductColorSize" Role="ProductColorSize" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Color">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductColorSize">
+              <PropertyRef Name="ColorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Photos_Products">
+          <End Type="FutonModel.Product" Role="Product" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="FutonModel.Photo" Role="Photo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Photo">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductColorSize_Products">
+          <End Type="FutonModel.Product" Role="Product" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="FutonModel.ProductColorSize" Role="ProductColorSize" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductColorSize">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductColorSize_Size">
+          <End Type="FutonModel.Size" Role="Size" Multiplicity="0..1" />
+          <End Type="FutonModel.ProductColorSize" Role="ProductColorSize" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Size">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductColorSize">
+              <PropertyRef Name="SizeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductTags_Products">
+          <End Type="FutonModel.Product" Role="Product" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="FutonModel.ProductTag" Role="ProductTag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductTag">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reviews_Products">
+          <End Type="FutonModel.Product" Role="Product" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="FutonModel.Review" Role="Review" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Review">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductTags_Tags">
+          <End Type="FutonModel.Tag" Role="Tag" Multiplicity="0..1" />
+          <End Type="FutonModel.ProductTag" Role="ProductTag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tag">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductTag">
+              <PropertyRef Name="TagId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="IsAccepted" Type="Boolean" Nullable="false" />
+          <Property Name="Token" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ForgetToken" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Slide">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Photo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Slogan" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Text" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Url" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FutonModelStoreContainer" CdmEntityContainer="FutonEntities1">
+          <EntitySetMapping Name="AdLocations">
+            <EntityTypeMapping TypeName="FutonModel.AdLocation">
+              <MappingFragment StoreEntitySet="AdLocation">
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Admins">
+            <EntityTypeMapping TypeName="FutonModel.Admin">
+              <MappingFragment StoreEntitySet="Admins">
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Fullname" ColumnName="Fullname" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ads">
+            <EntityTypeMapping TypeName="FutonModel.Ad">
+              <MappingFragment StoreEntitySet="Ads">
+                <ScalarProperty Name="LocationId" ColumnName="LocationId" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Brands">
+            <EntityTypeMapping TypeName="FutonModel.Brand">
+              <MappingFragment StoreEntitySet="Brands">
+                <ScalarProperty Name="Logo" ColumnName="Logo" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="FutonModel.Category">
+              <MappingFragment StoreEntitySet="Categories">
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Colors">
+            <EntityTypeMapping TypeName="FutonModel.Color">
+              <MappingFragment StoreEntitySet="Color">
+                <ScalarProperty Name="HexCode" ColumnName="HexCode" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Departments">
+            <EntityTypeMapping TypeName="FutonModel.Department">
+              <MappingFragment StoreEntitySet="Department">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Photos">
+            <EntityTypeMapping TypeName="FutonModel.Photo">
+              <MappingFragment StoreEntitySet="Photos">
+                <ScalarProperty Name="OrderBy" ColumnName="OrderBy" />
+                <ScalarProperty Name="IsProfile" ColumnName="IsProfile" />
+                <ScalarProperty Name="Path" ColumnName="Path" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductColorSizes">
+            <EntityTypeMapping TypeName="FutonModel.ProductColorSize">
+              <MappingFragment StoreEntitySet="ProductColorSize">
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="SizeId" ColumnName="SizeId" />
+                <ScalarProperty Name="ColorId" ColumnName="ColorId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="FutonModel.Product">
+              <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="view" ColumnName="view" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="BrandId" ColumnName="BrandId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="DiscountPrice" ColumnName="DiscountPrice" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductTags">
+            <EntityTypeMapping TypeName="FutonModel.ProductTag">
+              <MappingFragment StoreEntitySet="ProductTags">
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="TagId" ColumnName="TagId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reviews">
+            <EntityTypeMapping TypeName="FutonModel.Review">
+              <MappingFragment StoreEntitySet="Reviews">
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Settings">
+            <EntityTypeMapping TypeName="FutonModel.Setting">
+              <MappingFragment StoreEntitySet="Settings">
+                <ScalarProperty Name="Adress" ColumnName="Adress" />
+                <ScalarProperty Name="Tumblr" ColumnName="Tumblr" />
+                <ScalarProperty Name="Twitter" ColumnName="Twitter" />
+                <ScalarProperty Name="Facebook" ColumnName="Facebook" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="logo" ColumnName="logo" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sizes">
+            <EntityTypeMapping TypeName="FutonModel.Size">
+              <MappingFragment StoreEntitySet="Size">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tags">
+            <EntityTypeMapping TypeName="FutonModel.Tag">
+              <MappingFragment StoreEntitySet="Tags">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="FutonModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="ForgetToken" ColumnName="ForgetToken" />
+                <ScalarProperty Name="Token" ColumnName="Token" />
+                <ScalarProperty Name="IsAccepted" ColumnName="IsAccepted" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Slides">
+            <EntityTypeMapping TypeName="FutonModel.Slide">
+              <MappingFragment StoreEntitySet="Slides">
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Slogan" ColumnName="Slogan" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

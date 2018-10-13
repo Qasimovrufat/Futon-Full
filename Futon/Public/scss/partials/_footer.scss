@@ -1,0 +1,142 @@
+.footer-top{
+    background: #2f2f2f;
+    padding-top: 55px;
+    .footer-widget{
+        margin-bottom: 35px;
+        .footer-title{
+            margin-bottom: 35px;
+            h4{
+                color: #fff;
+                font-size: 20px;
+                text-transform: capitalize;
+                margin: 0;
+                font-family: 'Roboto Condensed', sans-serif;
+            }
+        }
+        .footer-content{
+            li{
+                padding: 0 0 9px;
+                display: block;
+                position: relative;
+                transition: all .3s ease 0s;
+                &:hover a{
+                    color: #ff5313;
+                    margin-left: 10px;
+                }
+                &:hover a::before{
+                    background-color: #ff5313;
+                   
+                }
+                a{
+                    color: #fff;
+                    font-size: 13px;
+                    position: relative;
+                   
+                   &::before{
+                    content: "";
+                    width: 5px;
+                    height: 5px;
+                    display: inline-block;
+                    border-radius: 100%;
+                    margin-right: 10px;
+                    margin-bottom: 1px;
+                    vertical-align: 0;
+                    background-color: #ababab; 
+                   }
+                }
+            }
+        }
+        .footer-social{
+            margin: 20px 0 0;
+            padding: 24px 0 0;
+            position: relative;
+            &::before{
+                border-top: 1px solid #4e4e4e;
+                content: "";
+                left: 0;
+                position: absolute;
+                top: 0;
+                width: 70%;
+            }
+            ul{
+                li{
+                    display: inline-block;
+                    margin-right: 5px;
+                    position: relative;
+                    a{
+                        background-color: #898989;
+                        border-radius: 3px;
+                        color: #fff;
+                        display: inline-block;
+                        height: 25px;
+                        line-height: 25px;
+                        text-align: center;
+                        width: 25px;
+                        &:hover{
+                            background-color: #ff5313;
+                        }
+                        &:hover::before,::after{
+                            opacity:1 ;
+                            visibility: visible;
+                        }
+                        &:hover::after{
+                            opacity:1 ;
+                            visibility: visible;
+                        }
+                        &::after{
+                            border-color: #ff5313 transparent transparent;
+                            border-style: solid;
+                            border-width: 6px 6px 0;
+                            bottom: 100%;
+                            content: "";
+                            left: 50%;
+                            margin-bottom: 4px;
+                            margin-left: -4px;
+                            opacity: 0;
+                            position: absolute;
+                            visibility: hidden;
+                        }
+                        &::before{
+                            background-color: #ff5313;
+                            bottom: 100%;
+                            color: #ffffff;
+                            content: attr(data-tooltip);
+                            font-size: 11px;
+                            left: 50%;
+                            line-height: 16px;
+                            margin-bottom: 9px;
+                            opacity: 0;
+                            padding: 4px 7px 7px;
+                            position: absolute;
+                            transform: translateX(-50%);
+                            visibility: hidden;
+                            white-space: nowrap;
+                        }
+                        
+                    }
+                }
+            }
+        
+        }
+    }
+}
+.footer-bottom{
+    background: #2b2b2b;
+    padding: 15px 0;
+    p{
+        color: #fff;
+        font-size: 12px;
+        margin: 2px 0 0;
+        a{
+            color: #fff;
+            font-size: 13px;
+            position: relative;
+           
+            &:hover{
+                background: #ff5313 none repeat scroll 0 0;
+            }
+           
+        }
+    }
+
+}

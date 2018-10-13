@@ -1,0 +1,62 @@
+﻿@model Futon.Models.Adview
+@{
+    ViewBag.Title = "Ads";
+}
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="col-lg-12 col-md-12">
+            <div class="card">
+                <div class="card-header card-header-primary">
+                    <h4 class="card-title d-inline-block">Ads</h4>
+                   
+                </div>
+                <div class="card-body table-responsive">
+                    <div class="col-lg-4">
+
+                    </div>
+                    <table class="table table-hover">
+                        <thead class="text-warning">
+                        <th> Photo</th>
+                        <th>
+                            Url
+                        </th>
+                        <th>
+                            Location
+                        </th>
+                   
+
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Ads)
+                            {
+                                <tr>
+                                    <td>
+                                        <img width="100" src="~/Uploads/@item.Photo" alt="" />
+
+                                    </td>
+                                    <td>
+                                        @item.Url
+                                    </td>
+                                    <td>
+                                        @item.AdLocation.Type
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("Edit", "edit", new { id = item.Id }) |
+                                      
+                                    </td>
+                                </tr>
+                            }
+
+
+
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

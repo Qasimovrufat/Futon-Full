@@ -1,0 +1,591 @@
+﻿@using Futon.Models;
+@{ 
+    FutonEntities1 db = new FutonEntities1();
+    Setting Setting = db.Settings.FirstOrDefault();
+    List<Department> Departments = db.Departments.ToList();
+    List<Brand> Brands = db.Brands.ToList();
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/x-icon" href="~/Public/img/favicon.png">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="~/Public/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/Public/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="~/Public/css/animate.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Public/css/jquery-ui.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+    <link rel="stylesheet" href="~/Public/scss/style.css">
+
+    <title>@ViewBag.Title</title>
+
+</head>
+
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="top">
+            <div class="container">
+                <div class="row text-center">
+                    <div class="col-lg-4 col-md-4 col-12 ">
+                        <div class="contact">
+                            <p>Welcome</p>
+                        </div>
+
+                    </div>
+                    <div class="col-lg-4 col-md-5 col-12">
+                        <div class="call">
+                            <p>
+                                CALL TO ORDER
+                                <span>@Setting.Phone</span>
+                            </p>
+                        </div>
+
+                    </div>
+                    <div class="col-lg-4 col-md-3 col-12 d-flex justify-content-center">
+                        <div class="log-reg float-right">
+                            @if (Session["logined"] == null)
+                            {
+                                <a class="login" href="@Url.Action("auth","account")">Login / Register</a>
+
+                            }
+                            else
+                            {
+
+                                <a class="login" href="@Url.Action("index","account")">My Account</a>
+                                <a class="reg" href="@Url.Action("logout","account")">logout</a>
+                            }
+
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="middle">
+            <div class="container">
+                <div class="row text-center">
+                    <div class="col-lg-4 col-md-12 col-12">
+                        <div class="logo">
+                            <a href="@Url.Action("index","home")">
+                                <img src="~/Uploads/Setting/@Setting.logo" alt="">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-8 col-md-12 col-12">
+                        <div class="middle-wrap d-flex justify-content-center">
+                            <div class="search  ">
+                                <form action="">
+                                    <input type="text" placeholder="Search product...">
+                                    <button type="submit">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </form>
+                            </div>
+                            <div class="curr-lang ">
+
+                                <div class="money">
+                                    <ul>
+                                        <li>
+                                            <a href="">
+                                                AZN
+                                                <i class="fa fa-angle-down"></i>
+                                            </a>
+                                            <ul class="dropdown">
+                                                <li>
+                                                    <a href="">$ GBP</a>
+                                                </li>
+                                                <li>
+                                                    <a href="">€ EUR</a>
+                                                </li>
+                                                <li>
+                                                    <a href="">$ USD</a>
+                                                </li>
+                                            </ul>
+                                    </ul>
+
+                                </div>
+                            </div>
+                            <div class="cart ">
+                                @{
+                                    Html.RenderPartial("~/Views/Shared/Cart.cshtml");
+                                }
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Header -->
+    <div class="container">
+        <!-- Navbar -->
+        <div class="navbar-main p-0 active">
+
+            <div class="row">
+
+                <div class="col-lg-12 ">
+                    <ul class="d-flex ">
+                        <li class="list-item">
+                            <a href="@Url.Action("index","home")">Home</a>
+                        </li>
+
+                        @foreach (var department in Departments)
+                        {
+                            <li class="list-item">
+                                <a href="@Url.Action("index","department" ,new { id=department.Id})">@department.Name</a>
+                                <div class="mega-menu submenu">
+                                    <ul>
+                                        <li class="single-mega-menu">
+                                            <ul>
+
+                                                @foreach (var categories in department.Categories.ToList())
+                                                {
+                                                    <li>
+                                                        <a href="@Url.Action("index","category" ,new { id=categories.Id , name=categories.Name.ToLower().Replace(" ","-").Replace(".","-")})">@categories.Name</a>
+                                                    </li>
+
+                                                }
+
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        }
+                        <li class="list-item">
+                            <a href="@Url.Action("index","wishlist")">Wishlist</a>
+                        </li>
+                        <li class="list-item">
+                            <a href="@Url.Action("index","cart")">Cart page</a>
+                        </li>
+
+                        <li class="list-item">
+                            <a href="@Url.Action("index","about")">About us</a>
+                        </li>
+
+                        <li class="list-item">
+                            <a href="@Url.Action("index","contact")">Contact us</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- End of Navbar !-->
+        <nav class="navbar navbar-expand-lg deactive">
+            <a class="navbar-brand" href="@Url.Action("index","home")">MENU</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon active">
+                    <span class="line"></span>
+                    <span class="line"></span>
+                    <span class="line"></span>
+                </span>
+                <span class="navbar-toggler-times">
+                    <i class="fa fa-times"></i>
+                </span>
+
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="@Url.Action("index","home")">
+                            Home
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+
+
+                    @foreach (var department in Departments)
+                    {
+                        <li class="nav-item dropdown">
+
+                            <a class="nav-link dropdown-toggle" href="@Url.Action("index","department" ,new { id=department.Id})" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                               aria-expanded="false">
+                                @department.Name
+                            </a>
+                            <span class="plus">
+                                <i class="fas fa-plus"></i>
+                            </span>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                                @foreach (var categories in department.Categories.ToList())
+                                {
+
+                                    <a class="dropdown-item" href="@Url.Action("index","category" ,new { id=categories.Id ,name=categories.Name.ToLower().Replace(" ","-").Replace(".","-")})">@categories.Name</a>
+                                }
+
+
+                            </div>
+                        </li>
+                    }
+
+
+
+                    <li class="nav-item active">
+                        <a class="nav-link" href="@Url.Action("index","about")">
+                            About Us
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="@Url.Action("index","contact")">
+                            Contact Us
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+        </nav>
+
+    </div>
+
+    @RenderBody()
+    <!-- Brand logo -->
+    <section class="brand-logo">
+        <div class="container">
+            <div class="brand-logo-active owl-carousel">
+                @foreach (var brand in Brands)
+                {
+                    <div class="single-brand-logo">
+                        <a href="">
+                            <img src="~/Uploads/Brands/@brand.Logo" alt="@brand.Name">
+                        </a>
+                    </div>
+                }
+
+
+
+
+
+
+            </div>
+        </div>
+    </section>
+    <!-- End Brand logo -->
+    <!-- Footer -->
+
+    <footer>
+        <div class="footer-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="footer-widget">
+                            <div class="footer-title">
+                                <h4>Our services</h4>
+                            </div>
+                            <div class="footer-content">
+                                <ul>
+                                    <li>
+                                        <a href="">
+                                            Shipping & Returns
+
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href=""> Secure Shopping</a>
+                                    </li>
+                                    <li>
+                                        <a href="">International Shipping</a>
+                                    </li>
+                                    <li>
+                                        <a href="">Affiliates</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="footer-social">
+                                <ul>
+                                    @if (Setting.Facebook != null)
+                                    {
+                                        <li>
+                                            <a href="" data-tooltip="facebook" class="tooltip-coustom">
+                                                <i class="fab fa-facebook-f"></i>
+                                            </a>
+                                        </li>
+                                    }
+                                    @if (Setting.Twitter != null)
+                                    {
+                                        <li>
+                                            <a href="" data-tooltip="twitter" class="tooltip-coustom">
+                                                <i class="fab fa-twitter"></i>
+                                            </a>
+                                        </li>
+                                    }
+                                    @if (Setting.Tumblr != null)
+                                    {
+
+                                        <li>
+                                            <a href="" data-tooltip="tumblr" class="tooltip-coustom">
+                                                <i class="fab fa-tumblr"></i>
+                                            </a>
+                                        </li>
+                                    }
+
+
+
+
+
+
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="footer-widget">
+                            <div class="footer-title">
+                                <h4>Information</h4>
+                            </div>
+                            <div class="footer-content">
+                                <ul>
+                                    <li>
+                                        <a href="">
+                                            Our Blog
+
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href=""> About Our Shop</a>
+                                    </li>
+                                    <li>
+                                        <a href="">Secure Shopping</a>
+                                    </li>
+                                    <li>
+                                        <a href="">Privacy Policy</a>
+                                    </li>
+                                    <li>
+                                        <a href="">Delivery infomation</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="footer-widget">
+                            <div class="footer-title">
+                                <h4>Departments</h4>
+                            </div>
+                            <div class="footer-content">
+                                <ul>
+                                    @foreach (var department in Departments)
+                                    {
+                                        <li>
+                                            <a href="">
+                                                @department.Name
+
+                                            </a>
+                                        </li>
+                                    }
+
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="footer-widget">
+                            <div class="footer-title">
+                                <h4>Facebook</h4>
+                            </div>
+                            <div class="facebook">
+                                <a href="facebook.com">
+                                    <img src="Public/img/banner-11.png" alt="">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-12">
+                        <p>
+                            Copyright ©
+                            <a href="https://www.facebook.com/rufet.qasimov.5">Rufat Gasimov</a>
+                            All Rights Reserved.
+                        </p>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-12">
+                        <div class="payment img text-right">
+                            <a href="">
+                                <img src="Public/img/payment.png" alt="">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- End of Footer -->
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span>X</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-5 col-sm-5 col-xs-12">
+                            <div class="modal-tab">
+                                <div class="product-details-large tab-content">
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-md-7 col-sm-7 col-xs-12">
+                            <div class="modal-pro-content">
+                                <h3>Ornare consequat</h3>
+                                <div class="price">
+                                    <span class="product-price-old">£162.00</span>
+                                    <span>£120.00</span>
+                                </div>
+                                <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet.</p>
+                                <div class="quick-view-select">
+                                    <div class="select-option-part">
+                                        <label for="">Size*</label>
+                                        <select name="" id="" class="select"></select>
+                                    </div>
+                                    <div class="quickview-color-wrap">
+                                        <label for="">Color*</label>
+                                        <div class="quickview-color">
+                                            <ul></ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <span class="status"><i class="fa fa-check "></i> In stock</span>
+                                <span class="notstatus"><i class="fas fa-times status"></i> Not in Stock</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Modal -->
+    <!-- Compare -->
+    <div class="modal fade" id="exampleCompare" tabindex="-1" role="dialog" aria-hidden="true">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span class="pe-7s-close">
+                <i class="fa fa-times"></i>
+            </span>
+        </button>
+        <div class="modal-dialog modal-compare-width" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <form action="#">
+                        <div class="table-content compare-style table-responsive">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>
+                                            <a href="#">Remove <span>x</span></a>
+                                            <img src="Public/img/compare-1.jpg" alt="">
+                                            <p>Phantom Remote Control Ver 2018</p>
+                                            <span>$75.99</span>
+                                            <a class="compare-btn" href="cart.html">Add to cart</a>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="compare-title"><h4>Description </h4></td>
+                                        <td class="compare-dec compare-common">
+                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has beenin the stand ard dummy text ever since the 1500s, when an unknown printer.</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="compare-title"><h4>Sku </h4></td>
+                                        <td class="product-none compare-common">
+                                            <p>-</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="compare-title"><h4>Availability  </h4></td>
+                                        <td class="compare-stock compare-common">
+                                            <p>In stock</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="compare-title"><h4>Weight   </h4></td>
+                                        <td class="compare-none compare-common">
+                                            <p>-</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="compare-title"><h4>Dimensions   </h4></td>
+                                        <td class="compare-stock compare-common">
+                                            <p>N/A</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="compare-title"><h4>brand   </h4></td>
+                                        <td class="compare-brand compare-common">
+                                            <p>HasTech</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="compare-title"><h4>color   </h4></td>
+                                        <td class="compare-color compare-common">
+                                            <p>Grey, Light Yellow, Green, Blue, Purple, Black </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="compare-title"><h4>size    </h4></td>
+                                        <td class="compare-size compare-common">
+                                            <p>XS, S, M, L, XL, XXL </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="compare-title"></td>
+                                        <td class="compare-price compare-common">
+                                            <p>$75.99 </p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End compare -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="~/Public/js/owl.carousel.min.js"></script>
+    <script src="~/Public/js/popper.js"></script>
+    <script src="~/Public/js/plugins.js"></script>
+    <script src="~/Public/js/wow.min.js"></script>
+    @RenderSection("script",required:false)
+    <script src="~/Public/js/jquery.scrollUp.js"></script>
+    <script src="~/Public/js/script.js"></script>
+    <script src="~/Public/js/main.js"></script>
+    <a href="#top" id="scrollUp">
+        <i class="fas fa-angle-double-up"></i>
+    </a>
+</body>
+
+</html>

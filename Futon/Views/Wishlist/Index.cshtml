@@ -1,0 +1,68 @@
+﻿@using Futon.Models
+@{
+    List<Wishlist>  Wishlists = new List<Wishlist>();
+    if (Session["Wishlist"] != null)
+    {
+        Wishlists = Session["Wishlist"] as List<Wishlist>;
+    }
+}
+@{
+    ViewBag.Title = "Wishlist";
+}
+
+<div class="container">
+    <!-- Page title -->
+    <div class="page-title">
+        <ul>
+            <li>
+                <a href="@Url.Action("index","home")">Home</a>
+                <i class="fa fa-angle-right"></i>
+            </li>
+            <li class="active-color">Wishlist</li>
+        </ul>
+    </div>
+
+    <div class="cart-main-area">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                <form action="">
+                    <div class="table-content">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>IMAGE</th>
+                                    <th>PRODUCT NAME</th>
+                                    <th>PRICE</th>
+                                    <th>ADD TO CART</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Wishlists)
+                                {
+                                    <tr data-id="@item.Id">
+                                        <td class="img">
+                                            <a href="@Url.Action("index","product",new {id=item.Id })">
+                                                <img src="@item.Photo" alt="">
+                                            </a>
+                                        </td>
+                                        <td class="name">
+                                            <a href="@Url.Action("index","product",new {id=item.Id })">@item.Name</a>
+                                        </td>
+                                        <td class="price">@(item.Price.ToString("#.##"))$</td>
+                                       
+                                        
+                                        <td class="wishlist-cart">
+                                            <a href="">add to cart</a>
+                                        </td>
+                                    </tr>
+                                }
+
+                          
+                            </tbody>
+                        </table>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>

@@ -1,0 +1,173 @@
+﻿@model Futon.Areas.Manage.Models.EditProduct
+@{
+    ViewBag.Title = "Edit";
+}
+
+<style>
+    option {
+        color: black;
+    }
+
+    .ck-editor__editable {
+        min-height: 250px;
+    }
+</style>
+
+<div class="content">
+    <div class="container-fluid">
+
+
+        <div class="col-lg-12 col-md-12">
+            <div class="card">
+                <div class="card-header card-header-primary">
+                    <h4 class="card-title d-inline-block">Details</h4>
+
+                </div>
+                <div class="card-body table-responsive">
+                    <form autocomplete="off" action="@Url.Action("edit",new { id = Model.Product.Id })" method="post" id="infoForm" data-id="@Model.Product.Id">
+                        <div class="form-group">
+                            <label>Status</label>
+                            <select class="form-control" name="Status">
+                            
+                                <option @(Model.Product.Status?"selected":"") value="true">Active</option>
+                                <option @(!Model.Product.Status?"selected":"") value="false">Deactive</option>
+                            </select>
+
+                        </div>
+                        <div class="form-group">
+                            <label>Name</label>
+                            <input type="text" value="@Model.Product.Name" class="form-control" name="Name">
+                        </div>
+                        <div class="form-group">
+                            <label>Department</label>
+                            <select class="form-control" name="DepartmentId">
+                                <option style="color:black;"></option>
+
+                                @foreach (var item in Model.Departments)
+                                {
+                                    <option @(Model.Product.Category.DepartmentId ==item.Id?"selected":"") value="@item.Id">@item.Name</option>
+                                }
+
+
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Categories</label>
+                            <select class="form-control " name="CategoryId">
+
+                                @foreach (var item in Model.Categories.Where(c=>c.DepartmentId ==Model.Product.Category.DepartmentId))
+                                {
+                                    <option @(Model.Product.CategoryId == item.Id?"selected" : "") value="@item.Id">@item.Name</option>
+                                }
+
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Brands</label>
+                            <select class="form-control" name="BrandId">
+                                <option style="color:black;"></option>
+
+                                @foreach (var item in Model.Brands)
+                                {
+                                    <option @(Model.Product.BrandId ==item.Id?"selected":"") value="@item.Id">@item.Name</option>
+                                }
+
+
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Count</label>
+                            <input type="text" class="form-control" value="@Model.Product.Count" name="Count">
+                        </div>
+                        <div class="form-group">
+                            <label>Price</label>
+                            <input type="text" value="@Model.Product.Price.ToString("0.00")" class="form-control" name="Price">
+                        </div>
+                        <div class="form-group">
+                            <label>DiscountPrice</label>
+                            <input type="text" value="@Model.Product.DiscountPrice.Value.ToString("0.00")" class="form-control" name="DiscountPrice">
+                        </div>
+                        <div class="form-group">
+                            <label>Tags</label>
+                            <select class="form-control select2" name="Tags" id="Tags" multiple="multiple">
+
+
+                                @foreach (var item in Model.Tags)
+                                {
+                                    <option @(Model.Product.ProductTags.FirstOrDefault(tg=>tg.TagId==item.Id)!=null?"selected":"") value="@item.Id">@item.Name</option>
+                                }
+
+
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Colors</label>
+                            <select class="form-control select2" name="Colors" id="Colors" multiple="multiple">
+
+
+                                @foreach (var item in Model.Colors)
+                                {
+                                    <option @(Model.Product.ProductColorSizes.FirstOrDefault(pcs=>pcs.ColorId == item.Id)!=null?"selected":"") value="@item.Id">@item.Name</option>
+                                }
+
+
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Sizes</label>
+                            <select class="form-control select2" id="Sizes" name="Sizes" multiple="multiple">
+
+
+                                @foreach (var item in Model.Sizes)
+                                {
+                                    <option @(Model.Product.ProductColorSizes.FirstOrDefault(pcs=>pcs.SizeId == item.Id)!=null?"selected":"") value="@item.Id">@item.Name</option>
+                                }
+
+
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Description</label>
+                            <textarea name="Description" id="editor">
+                                @Model.Product.Description
+                            </textarea>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-12 col-md-12">
+            <div class="card">
+                <div class="card-header card-header-primary">
+                    <h4 class="card-title d-inline-block">Photos</h4>
+
+                </div>
+                <div class="card-body table-responsive">
+                    <form action="@Url.Action("upload")" method="post" class="AjaxUpload">
+                        <div class="item">
+                            <label class="btn" for="Upload">
+                                Add Photo
+                            </label>
+                            <input id="Upload" type="file" multiple />
+                        </div>
+                        <ul class="photos">
+                            @foreach (var item in Model.Product.Photos)
+                            {
+                                <li>
+                                    <img src="~/Uploads/Products/Thumbnail/@item.Path" />
+                                    <a class="remove" data-file='@item.Path' href="#"><i class="fas fa-times"></i></a>
+                                </li>
+                            }
+                        </ul>
+                    </form>
+
+                    <button type="button" class="btn btn-success EditProduct">Edit Product</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+

@@ -1,0 +1,56 @@
+﻿@model Futon.Models.Setting
+@{
+    ViewBag.Title = "Edit";
+}
+
+<div class="content">
+    <div class="container-fluid">
+
+
+        <div class="col-lg-12 col-md-12">
+            <div class="card">
+                <div class="card-header card-header-primary">
+                    <h4 class="card-title d-inline-block">Edit</h4>
+
+                </div>
+                <div class="card-body table-responsive">
+                    <form autocomplete="off" action="@Url.Action("edit",new { id = Model.Id, deletedPhoto = Model.logo })" method="post" id="infoForm" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="text" value="@Model.Email" class="form-control" name="Email">
+                        </div>
+                        <div class="form-group">
+                            <label>Phone</label>
+                            <input type="text" value="@Model.Phone" class="form-control" name="Phone">
+                        </div>
+                        <div class="form-group">
+                            <label>Facebook</label>
+                            <input type="text" value="@Model.Facebook" class="form-control" name="Facebook">
+                        </div>
+                        <div class="form-group">
+                            <label>Twitter</label>
+                            <input type="text" value="@Model.Twitter" class="form-control" name="Twitter">
+                        </div>
+                        <div class="form-group">
+                            <label>Address</label>
+                            <input type="text" value="@Model.Adress" class="form-control" name="Adress">
+                        </div>
+                        <div class="">
+                            <label>Photo</label>
+                            <input class="photo" style="display:block;" type="file"   name="Photo">
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="img">
+                                <img id="img" src="~/Uploads/Setting/@Model.logo" alt="Alternate Text" />
+                            </div>
+                        </div>
+                        <button type="submit" class=" btn btn-info">Edit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+

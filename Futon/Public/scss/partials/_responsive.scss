@@ -1,0 +1,125 @@
+
+
+
+@media screen and  (max-width: 767px){
+    .container{
+        // max-width: 720px !important;
+    }
+    .middle{
+        .col-lg-8{
+
+            
+              
+                .middle-wrap{
+                    display: block !important;
+                    justify-content: center;
+                }
+            
+        }
+        .cart{
+            padding: 0 !important;
+        }
+    }
+    .slider-content h1 {
+        font-size: 27px !important;
+    }
+    .slider-content h2 {
+        font-size: 30px !important;
+    }
+   
+    .slider-content {
+        padding-right: 15px !important;
+    }
+    .header{
+        .curr-lang{
+            margin: 10px 0 0 25px !important;
+        }
+        .logo{
+            margin: 0 0 20px;
+        }
+        .search{
+            width: 100%;
+        }
+        .middle .search{
+            width: 100% !important;
+        }
+    }
+}
+
+@media screen and   (max-width: 991px) and (min-width: 768px){
+    .container {
+        max-width: 720px !important;
+    }
+    .slider-content p {
+        width: 85% !important
+        ;
+    }
+    .header{
+        .top{
+            a{
+                padding: 2px 17px 7px !important;
+            }
+        }
+        .middle{
+            .col-lg-8{
+                .middle-wrap{
+                    justify-content: center;
+                }
+            }
+        }
+        .middle-wrap{
+            justify-content: center !important;
+        }
+        .curr-lang{
+            margin: 10px 0 0 30px !important; 
+        }
+        .logo{
+            margin: 0 0 20px;
+        }
+        .middle .search{
+            width: 345px !important;
+        }
+    }
+}
+@media screen and  (max-width: 1169px) and (min-width: 992px){
+    .header{
+        .curr-lang{
+            margin: 10px 0 0 30px !important; 
+        }
+        .logo{
+            margin: 0 0 20px;
+        }
+        .middle .search{
+            width: 300px !important;
+        }
+    }
+}
+
+
+@media screen and (max-width: 1299px) and (min-width: 1170px){
+  
+    .header{
+        .middle-wrap{
+           
+        }
+        .curr-lang{
+           
+            text-align: center;
+        }
+        .logo{
+            margin: 0 0 20px;
+        }
+        .middle .search{
+            width: 318px !important;
+        }
+    }
+}
+@media (min-width: 1200px){
+    .container{
+        max-width: 1200px;
+    }
+}
+
+
+
+

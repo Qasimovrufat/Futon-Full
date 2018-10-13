@@ -1,0 +1,318 @@
+﻿@model Futon.Models.ViewProduct
+@{
+    ViewBag.Title = Model.Product.Name + "-" + Model.Product.Brand.Name;
+}
+
+<div class="container">
+    <!-- Page title -->
+    <div class="page-title">
+        <ul>
+            <li>
+                <a href="@Url.Action("index","home")">Home</a>
+                <i class="fa fa-angle-right"></i>
+            </li>
+            <li class="active-color">@Model.Product.Name</li>
+        </ul>
+    </div>
+    <!-- End Page title -->
+    <!-- Product Details -->
+    <div class="product-details-area modal-body">
+        <div class="row">
+            <div class="col-md-5 col-sm-5 col-xs-12">
+                <div class="modal-tab">
+                    <div class="product-details-large tab-content">
+                        @foreach (var item in Model.Product.Photos.OrderBy(p => p.OrderBy))
+                        {
+                            <div class="tab-pane @(item.OrderBy==1?"active":"")" style="display:none;" id="image-@item.OrderBy">
+                                <img src="~/Uploads/Products/@item.Path" alt="zoom" />
+                            </div>
+                        }
+
+                     
+                    </div>
+                    <div class="product-details-small product-dec-slider  nav-style owl-carousel">
+
+                        @foreach (var item in Model.Product.Photos.OrderBy(p => p.OrderBy))
+                        {
+                            <a href="#image-@item.OrderBy">
+                                <img src="~/Uploads/Products/Thumbnail/@item.Path" alt="" />
+                            </a>
+                        }
+
+                
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-7 col-sm-7 col-xs-12">
+                <div class="modal-pro-content">
+                    <h3>@Model.Product.Name</h3>
+                    <div class="price">
+                        @if (Model.Product.DiscountPrice != null)
+                        {
+                            var discount = Model.Product.DiscountPrice.Value.ToString("0.00");
+                        <span class="product-price-old">@Model.Product.Price.ToString("0.00")</span>
+
+                            <span>@discount</span>
+                        }
+                        else
+                        {
+                            <span>@Model.Product.Price.ToString("0.00")</span>
+                        }
+                        
+                    </div>
+                    <p>
+                     @Model.Product.Description
+                    </p>
+                    <div class="quick-view-select">
+                        <div class="select-option-part">
+                            <label for="">Size*</label>
+                            <select name="" id="" class="select">
+                                @foreach (var item in Model.Product.ProductColorSizes.Where(pcs => pcs.ProductId == Model.Product.Id && pcs.SizeId!=null) )
+                                {
+
+                                        <option value="@item.Size.Name">@item.Size.Name</option>
+
+                                    
+                                }
+
+                            </select>
+                        </div>
+                        <div class="quickview-color-wrap">
+                            <label for="">Color*</label>
+                            <div class="quickview-color">
+                                <ul>
+                                    @foreach (var item in Model.Product.ProductColorSizes.Where(pcs=>pcs.ProductId == Model.Product.Id && pcs.ColorId != null))
+                                    {
+                                        <li style="background: @item.Color.HexCode"></li>
+                                    }
+                                 
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-quantity" data-id="@Model.Product.Id">
+                        
+                        
+                            <button class="add-cart" type="submit">Add to cart</button>
+                       
+                       
+                    </div>
+                    <div class="product-details-categories">
+                        <label for="">Categories :</label>
+                        <ul>
+                            @foreach (var item in Model.categories)
+                            {
+                                <li>
+                                    <a href="@Url.Action("index" , "category" , new {id = item.Id })">@item.Name ,</a>
+                                </li>
+                            }
+
+                        </ul>
+                    </div>
+                  
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--End Product Details -->
+    <!-- Description-reviews -->
+    <div class="description-review-area">
+        <div class="description-review-topbar text-center">
+            <a class="active" href="#des-details1">DESCRIPTION</a>
+            <a href="#des-details2">MORE INFORMATION</a>
+            <a href="#des-details3">REVIEWS (@Model.Product.Reviews.Count())</a>
+        </div>
+        <div class="description-review-bottom">
+            <div id="des-details1" class="tab-pane ">
+                <div class="product-description-wrapper">
+                    <p>
+                       @Model.Product.Description
+                    </p>
+               
+                </div>
+            </div>
+            <div id="des-details2" class="tab-pane">
+                <div class="product-anotherinfo-wrapper">
+                    <ul>
+                        <li>
+                            <span>name:</span>
+                           @Model.Product.Name
+                        </li>
+                        <li>
+                            <span>color:</span>
+                            @foreach (var item in Model.Product.ProductColorSizes.Where(pcs => pcs.ProductId == Model.Product.Id && pcs.ColorId != null))
+                            {
+                            <span> @item.Color.Name</span>
+                            }
+                                
+                            </li>
+    
+                        <li>
+
+                            <span>size:</span>
+                            @foreach (var item in Model.Product.ProductColorSizes.Where(pcs => pcs.ProductId == Model.Product.Id && pcs.SizeId != null))
+                            {
+                            <span>  @item.Size.Name</span>
+                            }
+                        </li>
+    
+                         
+    
+                            <li>
+    
+                                <span>Brand:</span>
+                                @Model.Product.Brand.Name
+                            </li>
+    
+                        </ul>
+    
+                    </div>
+    
+                </div>
+    
+                <div id="des-details3" class="tab-pane  ">
+                    <div class="ratings-wrapper">
+                        @foreach (var item in Model.Product.Reviews.OrderBy(r => r.CreatedAt))
+                        {
+                            <div class="single-ratings">
+                                <div class="star-author">
+                                    <div class="product-rating float-left">
+                                        @{
+                                            var starCount = item.Rate;
+                                        }
+                                        @for (var i = 0; i < starCount; i++)
+                                        {
+                                            <i class="fa fa-star"></i>
+                                        }
+                                        @for (var i = 0; i < (5-starCount); i++)
+                                        {
+                                            <i class="fa fa-star rating-gray"></i>
+                                        }
+                                    
+                                    </div>
+                                    <div class="rating-author float-right">
+                                        <h3>@item.Name</h3>
+                                       
+                                        <span>@item.CreatedAt.Value.ToString("dd-MMMM-yyyy HH:mm")</span>
+                                    </div>
+
+
+                                </div>
+                                <p>@item.Text</p>
+                            </div>
+                        }
+
+                     
+                        <div class="rating-form-wrapper">
+                            <h3>Add your Comments :</h3>
+                            <div class="rating-form">
+                                <form action="@Url.Action("add","review",new {id=Model.Product.Id })" method="post">
+                                    <div class="star-box">
+                                        <h2>Rating:</h2>
+                                  
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <input type="text" name="name" placeholder="Name" required>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="text" name="email" placeholder="Email" required>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <input type="text" name="text" placeholder="Review" required>
+                                            <button type="submit" class="btn"> Add Reviews</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+            </div>
+        </div>
+    </div>
+    <!--End Description-reviews -->
+    <!-- Related Products -->
+    <div class="related-products">
+        <div class="title text-center">
+            <h4>related product</h4>
+        </div>
+        <div class="related-product-active owl-carousel">
+            @foreach (var item in Model.related)
+            {
+                <div class="product-wrapper">
+                    <div class="product-img">
+
+                        <a href=@Url.Action("index", "product", new { id = item.Id, name = item.Name })>
+                            @{
+                                var first = item.Photos.Where(p => p.OrderBy == 1).FirstOrDefault().Path;
+                                var second = item.Photos.Where(p => p.OrderBy == 2).FirstOrDefault().Path;
+                            }
+                            <img src="~/Uploads/Products/@first" alt="@item.Name" class="primary">
+                            <img src="~/Uploads/Products/@second" alt="@item.Name" class="secondary">
+                        </a>
+
+
+                        <div class="quick-view">
+                            <a href="" data-toggle="modal" data-target="#myModal">Quick view</a>
+                        </div>
+                        @if (item.DiscountPrice != null)
+                        {
+                            <span class="sale-text">Sale</span>
+                        }
+                    </div>
+                    <div class="product-content text-center">
+                        <h4>
+                            <a href="@Url.Action("index", "product", new { id = item.Id, name = item.Name })">
+                                @item.Name
+                            </a>
+                        </h4>
+                        @{
+                            int starCount = 0;
+                            if (item.Reviews.Count > 0)
+                            {
+                                starCount = (int)Math.Ceiling((decimal)item.Reviews.Average(f => f.Rate));
+                            }
+
+
+                        }
+                        <div class="rating">
+                            @for (int i = 0; i < starCount; i++)
+                            {
+                                <i class="fa fa-star"></i>
+                            }
+
+                        </div>
+                        <div class="price">
+                            @if (item.DiscountPrice != null)
+                            {
+                                var discount = item.DiscountPrice.Value.ToString("0.00");
+                                <span class="product-price-old">@item.Price.ToString("0.00")</span>
+
+                                <span>@discount</span>
+                            }
+                            else
+                            {
+                                <span>@item.Price.ToString("0.00")</span>
+                            }
+                        </div>
+                        <div class="product-action text-center">
+                            <a href="" class="add-cart">
+                                Add to Cart
+                                <img src="img/cart-2.png" alt="">
+                            </a>
+                            <a href="" data-tooltip="Wishlist" class="wishlist tooltip-coustom">
+                                <i class="fa fa-heart"></i>
+                            </a>
+                            <a href="" data-toggle="modal" data-target="#exampleCompare" class="compare tooltip-coustom" data-tooltip="Compare">
+                                <i class="fas fa-exchange-alt"></i>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            }
+           
+        </div>
+    </div>
+</div>

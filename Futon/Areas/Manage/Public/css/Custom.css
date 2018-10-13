@@ -1,0 +1,41 @@
+﻿.AjaxUpload #Upload {
+    display: none;
+}
+
+.AjaxUpload label {
+    background: linear-gradient(60deg, #7b1fa2, #913f9e);
+    color: white;
+    padding: 0px 25px;
+    text-align: center;
+    line-height: 40px;
+    cursor: pointer;
+}
+.img{
+    margin-top:25px;
+}
+
+.photos {
+    list-style-type: none;
+    padding: 0;
+}
+
+    .photos li {
+        display: inline-block;
+        position: relative;
+        padding: 15px;
+        width: 18%;
+    }
+
+        .photos li img {
+            width: 100%;
+        }
+
+        .photos li a {
+            color: red;
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+.StatusToggle{
+    cursor :pointer;
+}
